@@ -1,0 +1,40 @@
+[plugin]
+id = "command-intent-guard"
+name = "Команда или вопрос?"
+version = "0.1.0"
+description = "Помогает Астре отличить голосовую команду от вопроса о похожем по звучанию слове или фразе"
+author = "you"
+license = "MIT"
+
+[entry]
+command = "target/release/command_intent_guard"
+
+[capabilities]
+tools = true
+
+[config]
+schema = """
+{
+  "type": "object",
+  "properties": {
+    "similarity_threshold": {
+      "type": "number",
+      "default": 80,
+      "title": "Порог схожести (%)",
+      "description": "Насколько сильно фраза должна совпадать с триггером команды, чтобы считаться командой при отсутствии явных признаков"
+    },
+    "extra_question_words": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "title": "Доп. слова-признаки вопроса"
+    },
+    "extra_command_words": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "title": "Доп. слова-признаки команды"
+    }
+  }
+}
+"""

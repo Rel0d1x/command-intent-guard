@@ -1,0 +1,11 @@
+[package]
+name = "command_intent_guard"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Один пакет, как требует §3.1 production plan: остальное (tokio, serde,
+# serde_json, anyhow, async-trait, schemars) приходит через
+# astra_plugin_sdk::prelude — эта версия реально есть на crates.io
+# (проверено при сборке whisper-stt-plus в этой же папке).
+astra-plugin-sdk = "0.6"
