@@ -3,7 +3,7 @@ id = "command-intent-guard"
 name = "Команда или вопрос?"
 version = "0.1.0"
 description = "Помогает Астре отличить голосовую команду от вопроса о похожем по звучанию слове или фразе"
-author = "you"
+author = "Rel0d1x"
 license = "MIT"
 
 [entry]

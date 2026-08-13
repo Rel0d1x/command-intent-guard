@@ -31,16 +31,28 @@
 объяснением, чтобы модель могла, например, переспросить пользователя при
 `ambiguous`, а не выполнять команду молча.
 
-## Сборка и установка
+## Установка
+
+**Релиз, собранный и аттестованный GitHub Actions:**
+[последний релиз](https://github.com/Rel0d1x/command-intent-guard/releases/latest) →
+скачать `command-intent-guard-<версия>-windows-x64.astraplugin` (или
+`linux-x64`) → в Astra Settings → Plugins → Install from file. Плагину нужна
+только капабилити `tools`, так что все четыре высокорисковых права (тир 2)
+для него и не запрашивались — Local Install ничего не режет.
+
+```bash
+astra-plugin verify command-intent-guard-0.1.0-windows-x64.astraplugin
+gh attestation verify command-intent-guard-0.1.0-windows-x64.astraplugin --repo Rel0d1x/command-intent-guard
+```
+
+**Для разработки** — `astra-plugin dev .` (sideload, требует Developer Mode).
+
+## Сборка
 
 ```bash
 cargo build --release   # target\release\command_intent_guard.exe
 cargo test               # логика классификации через Level-1 Harness
 ```
-
-Установка без CLI — sideload: в настройках Astra → Plugins указать путь к
-этой папке (режим разработки), либо собрать `.astraplugin` и поставить через
-Local Install.
 
 ## Конфигурация (Astra → Plugins → Команда или вопрос?)
 
@@ -58,3 +70,14 @@ Local Install.
 - Плагин не видит список команд пользователя напрямую (у `tools`-плагинов нет
   доступа к `CommandService` — он только для UI Astra), поэтому
   `command_name`/`trigger_phrase` должна передавать сама модель.
+
+## Статус публикации
+
+`astra-plugin init-ci` → тег `v0.1.0` → CI собрал `linux-x64`/`windows-x64`,
+аттестовал бандлы и опубликовал [релиз](https://github.com/Rel0d1x/command-intent-guard/releases/tag/v0.1.0)
+с `SHA256SUMS.txt` и `.sigstore.jsonl`. Тот же баг с закреплением тега, что и
+в `whisper-stt-plus` (см. его README) — `init-ci` пришлось поправить вручную.
+
+Регистрация в каталоге Astra (`get-listed`) не выполнена — это разовая ручная
+заявка от имени владельца репозитория, оставлена на ваше усмотрение. Сегодня
+установка — через Local Install (файл из релиза выше) или sideload.
