@@ -30,7 +30,7 @@ jobs:
     # in mihailinl/AstraPlugins would otherwise own the build step of every plugin
     # that trusts it — and that build step runs in YOUR repository with the
     # token above. `astra-plugin init-ci` keeps this line current.
-    uses: mihailinl/AstraPlugins/.github/workflows/plugin-release.yml@dc1a044876926e9cf1170f034e2eab533ec07641  # plugin-release/v1
+    uses: mihailinl/AstraPlugins/.github/workflows/plugin-release.yml@e3329df252a46d747676cb540ae4b986af68a3ad  # plugin-release/v1 (dereferenced — `init-ci` pinned the annotated tag object's own SHA, which GitHub's reusable-workflow resolver rejects with "workflow was not found"; this is the commit that tag object points at)
     with:
       plugin-dir: .
       # The tag that releases THIS plugin, and nothing else in this repository.
